@@ -24,13 +24,6 @@ class Environment:
         self.uptime_url = os.environ.get("UPTIME_URL")
         self.hack_club_ai_api_key = os.environ.get("HACK_CLUB_AI_API_KEY")
 
-        self.site_url = os.environ.get("SITE_URL")
-        self.site_api_key = os.environ.get("SITE_API_KEY")
-        if self.site_url and not self.site_api_key:
-            raise ValueError(
-                "SITE_API_KEY must be set if SITE_URL is set to generate magic links"
-            )
-
         self.otel_logs_url = os.environ.get("OTEL_EXPORTER_OTLP_LOGS_ENDPOINT")
         self.otel_service_name = os.environ.get("OTEL_SERVICE_NAME", "nephthys")
         # Allows easily providing HTTP Basic Auth credentials formatted as user:pass
@@ -47,7 +40,7 @@ class Environment:
         )
         self.log_level_otel = os.environ.get("LOG_LEVEL_OTEL", logging.INFO)
         self.base_url: str = os.environ.get(
-            "BASE_URL", "https://nephthys.hackclub.com"
+            "BASE_URL", "https://hackatime.hackclub.com"
         ).rstrip("/")
 
         self.slack_help_channel = os.environ.get("SLACK_HELP_CHANNEL", "unset")
@@ -55,9 +48,9 @@ class Environment:
         self.slack_bts_channel = os.environ.get("SLACK_BTS_CHANNEL", "unset")
         self.slack_user_group = os.environ.get("SLACK_USER_GROUP", "unset")
         self.slack_maintainer_id = os.environ.get("SLACK_MAINTAINER_ID", "unset")
-        self.program = os.environ.get("PROGRAM", "summer_of_making")
+        self.program = os.environ.get("PROGRAM", "hackatime")
         self.daily_summary = True if not os.environ.get("DAILY_SUMMARY") else False
-        self.app_title = os.environ.get("APP_TITLE", "helper heidi")
+        self.app_title = os.environ.get("APP_TITLE", "Hackatime Helper")
 
         self.port = int(os.environ.get("PORT", 3000))
 

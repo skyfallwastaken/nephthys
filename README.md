@@ -1,6 +1,6 @@
-# Nephthys
+# Hackatime Support Bot (Nephthys)
 
-Nephthys is the bot powering many support channels in the Hack Club Slack such as #flavortown-help and #identity-help! Below is a guide to set her up for developing and here's a list of some of her features :)
+Nephthys is configured here as the Hackatime support bot for Hack Club Slack. Below is a guide to set it up and run it.
 
 ## Features
 
@@ -23,14 +23,8 @@ Sometimes it’s nice to be able to do things quickly... Here’s where macros c
 
 - `?resolve` - the ticket gets closed. Equivalent of hitting the resolve button
 - `?reopen` - reopen a closed ticket
-- `?identity` - redirect to #identity-help
-- `?faq` - redirect to the FAQ
-- `?hii` - silly message :3
-- `?shipcertqueue` - tell them to wait and vote because there's a backlog of ships
-- `?fraud` - redirect to Fraud Squad
 - `?thread` - remove the reaction and all Nephthys replies to unclutter duplicates
-- `?shipwrights` - redirect to #ask-the-shipwrights
-- more to come?? feel free to PR your own into hackclub/nephthys or tell me what you want
+- `?dev` - redirect to #hackatime-dev for development questions
 
 ### Stale
 
@@ -95,6 +89,8 @@ docker run --name hh-postgres -e POSTGRES_PASSWORD=postgres -p 5432:5432 -d post
    ```
 
 4. Edit the `.env` file and fill in the values:
+   - Set `PROGRAM="hackatime"`
+   - Set `BASE_URL="https://hackatime.hackclub.com"` (or your own deployed URL)
 
 ## Running the Application
 
@@ -108,21 +104,20 @@ docker run --name hh-postgres -e POSTGRES_PASSWORD=postgres -p 5432:5432 -d post
    - In "Event Subscriptions" and "Interactivity & Shortcuts", update the request URL to your HTTPS URL followed by `/slack/events`.
    - In "OAuth & Permissions", update `Redirect URLs` to your HTTPS URL followed by `/slack/oauth_redirect`.
 
-3. MAKE SURE YOU CHANGE THE COMMAND - DO NOT USE THE SAME COMMAND
-4. Install pre-commit hooks:
+3. Install pre-commit hooks:
 
    ```
    uv run pre-commit install
    ```
 
-5. Start your database and update the database schema:
+4. Start your database and update the database schema:
 
    ```
    uv run prisma db push
    uv run prisma generate
    ```
 
-6. Start the application:
+5. Start the application:
    ```
    nephthys
    ```
@@ -135,7 +130,7 @@ Contributions are welcome! Please feel free to submit a Pull Request.
 
 A work-in progress document with some codebase conventions can be found at [docs/contributing.md](docs/contributing.md).
 
-The [#nephthys-dev](https://hackclub.enterprise.slack.com/archives/C09QR2BH3GE) channel in the Slack is available for technical discussion or questions.
+The `#hackatime-dev` channel in Slack is available for technical discussion or questions.
 
 ### Scripts
 

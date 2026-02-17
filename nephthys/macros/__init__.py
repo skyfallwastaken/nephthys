@@ -1,16 +1,9 @@
 from typing import Any
 
-from nephthys.macros.faq import FAQ
-from nephthys.macros.fraud import Fraud
-from nephthys.macros.hello_world import HelloWorld
-from nephthys.macros.identity import Identity
+from nephthys.macros.dev import Dev
 from nephthys.macros.reopen import Reopen
 from nephthys.macros.resolve import Resolve
-from nephthys.macros.shipcertqueue import ShipCertQueue
-from nephthys.macros.shipwrights import Shipwrights
 from nephthys.macros.thread import Thread
-from nephthys.macros.trigger_daily_stats import DailyStats
-from nephthys.macros.trigger_fulfillment_reminder import FulfillmentReminder
 from nephthys.macros.types import Macro
 from nephthys.utils.env import env
 from nephthys.utils.logging import send_heartbeat
@@ -21,16 +14,9 @@ from prisma.models import User
 
 macro_list: list[type[Macro]] = [
     Resolve,
-    HelloWorld,
-    FAQ,
-    Identity,
-    Fraud,
-    ShipCertQueue,
     Thread,
     Reopen,
-    DailyStats,
-    FulfillmentReminder,
-    Shipwrights,
+    Dev,
 ]
 
 macros = [macro() for macro in macro_list]

@@ -20,7 +20,7 @@ class Thread(Macro):
         if not sender:
             return
 
-        # Deletes the first (FAQ) message sent by the bot
+        # Deletes the initial bot reply sent in the thread
         await delete_bot_replies(ticket.id)
 
         if ticket.status != TicketStatus.CLOSED:

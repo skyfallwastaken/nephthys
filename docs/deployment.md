@@ -1,4 +1,4 @@
-# Deploying Nephthys on Hack Club Coolify
+# Deploying Nephthys for Hackatime on Hack Club Coolify
 
 Here's a mostly-complete guide to deploying a new instance of Nephthys on the Hack Club Coolify.
 
@@ -11,7 +11,7 @@ You can also follow it to deploy Nephthys elsewhere, but you'll have to replace 
 3. To add the database, select **PostgreSQL**
 4. Select the **coolify-app-server-b** server (as it's currently recommended)
 5. Select standard PostgreSQL
-6. Update the database name to something useful like "Flavorbase" or "Construct Data". Perhaps add a description too.
+6. Update the database name to something useful like "Hackatime Data". Perhaps add a description too.
 7. You'll need the **Postgres URL (internal)** later, so write it down or idk, keep the tab open or something
 8. You can start the database now, or later. Just don't forget to do it
 
@@ -27,7 +27,7 @@ You can also follow it to deploy Nephthys elsewhere, but you'll have to replace 
    ![Screenshot of the Coolify UI](deployment-1.png)
 
 7. Update the name and description to be descriptive
-8. Update the domain to be a custom one you've set up on [hackclub/dns](https://github.com/hackclub/dns) (it should be `[something].nephthys.hackclub.com`) (or leave the ugly default domain)
+8. Update the domain to a custom one you've set up on [hackclub/dns](https://github.com/hackclub/dns), ideally `hackatime.hackclub.com`
 9. Environment variables! We'll set them later
 
 ## Creating the Slack app
@@ -37,10 +37,9 @@ Note: These steps have to be done by a Workspace Admin (otherwise it will be una
 1. Go to <https://api.slack.com/apps>
 2. Create New App > From a manifest
 3. Select YAML. Paste the [manifest.yml](../manifest.yml) file (but don't submit it yet)
-4. Update the `https://nephthys.hackclub.com/` URLs in the manifest to match the bot's domain (see above), and update the `name`, `description`, and bot user's `display_name`.
-5. Important: **Change the name of the `/dm-magic-link` command!** Or remove it entirely if it's not relevant
-6. Review the app's permissions and authorise it
-7. Click **OAuth & Permissions** in the sidebar, and hit **Install to Hack Club**
+4. Update the `https://hackatime.hackclub.com/` URLs in the manifest to match your bot domain (if different), and update the `name`, `description`, and bot user's `display_name` if needed.
+5. Review the app's permissions and authorise it
+6. Click **OAuth & Permissions** in the sidebar, and hit **Install to Hack Club**
 
 ## Setting environment variables
 
@@ -67,17 +66,15 @@ Note: These steps have to be done by a Workspace Admin (otherwise it will be una
    SLACK_USER_GROUP="S..."
    # Copy this from the PostgreSQL resource you created earlier
    DATABASE_URL="postgres://postgres:blahblah@somewhere:5432/postgres"
-   # Pick a transcript from the transcripts/ folder (your event will probably have its own)
-   PROGRAM="flavortown"
+   # Hackatime transcript (this repo is now Hackatime-only)
+   PROGRAM="hackatime"
    # Choose a title to be shown to helpers at the top of the App Home
-   APP_TITLE="Heidi the Assistant"
+   APP_TITLE="Hackatime Helper"
    # Hack Club AI API key for generating ticket titles (highly recommended)
    HACK_CLUB_AI_API_KEY="sk-hc-v1-..."
    # Set this to the URL where the site will be hosted
-   BASE_URL="https://summer.nephthys.hackclub.com"
+   BASE_URL="https://hackatime.hackclub.com"
    ```
-
-   - `SITE_API_KEY` (and `SITE_URL`) are only used for generating magic links for Summer of Making, so they don't have to be included
 
 3. There's more optional environment variables that you can set, which I shall document here:
 

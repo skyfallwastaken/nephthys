@@ -12,7 +12,6 @@ from nephthys.actions.create_team_tag import create_team_tag_btn_callback
 from nephthys.actions.create_team_tag import create_team_tag_view_callback
 from nephthys.actions.resolve import resolve
 from nephthys.actions.tag_subscribe import tag_subscribe_callback
-from nephthys.commands.dm_magic_link import dm_magic_link_cmd_callback
 from nephthys.events.app_home_opened import on_app_home_opened
 from nephthys.events.app_home_opened import open_app_home
 from nephthys.events.channel_join import channel_join
@@ -122,11 +121,3 @@ async def assign_category_tag(
     ack: AsyncAck, body: Dict[str, Any], client: AsyncWebClient
 ):
     await assign_category_tag_callback(ack, body, client)
-
-
-@app.command("/dm-magic-link")
-@app.command("/dm-magic-link-dev")
-async def dm_magic_link(
-    command, ack: AsyncAck, body: Dict[str, Any], client: AsyncWebClient
-):
-    await dm_magic_link_cmd_callback(command, ack, body, client)

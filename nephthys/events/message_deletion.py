@@ -44,7 +44,7 @@ async def handle_question_deletion(
     should_keep_thread = (
         # Preserve if there are any human replies
         len(non_bot_replies) > 0
-        # More than 2 bot replies implies someone ran ?faq or something, so we'll preserve the ticket
+        # More than 2 bot replies implies helper macro activity, so we'll preserve the ticket
         or len(bot_replies) > 2
     )
     if should_keep_thread:

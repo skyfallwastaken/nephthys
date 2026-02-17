@@ -1,31 +1,22 @@
-from nephthys.actions.resolve import resolve
 from nephthys.macros.types import Macro
 from nephthys.utils.env import env
 from nephthys.utils.slack_user import get_user_profile
 from nephthys.utils.ticket_methods import reply_to_ticket
 
 
-class Shipwrights(Macro):
-    name = "shipwrights"
+class Dev(Macro):
+    name = "dev"
 
     async def run(self, ticket, helper, **kwargs):
         """
-        A macro used to refer people to shipwrights support.
+        Points users to the #hackatime-dev channel.
         """
         sender = await env.db.user.find_first(where={"id": ticket.openedById})
         if not sender:
             return
         user = await get_user_profile(sender.slackId)
         await reply_to_ticket(
-            text=env.transcript.shipwrights_macro.replace(
-                "(user)", user.display_name()
-            ),
+            text=env.transcript.dev_macro.replace("(user)", user.display_name()),
             ticket=ticket,
             client=env.slack_client,
-        )
-        await resolve(
-            ts=ticket.msgTs,
-            resolver=helper.slackId,
-            client=env.slack_client,
-            send_resolved_message=False,
         )

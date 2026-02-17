@@ -173,7 +173,7 @@ async def handle_new_question(
     )
     ticket_url = f"https://hackclub.slack.com/archives/{env.slack_ticket_channel}/p{ticket_message_ts.replace('.', '')}"
 
-    async with perf_timer("Sending user-facing FAQ message"):
+    async with perf_timer("Sending user-facing ticket message"):
         user_facing_message = await send_user_facing_message(
             event, client, text=user_facing_message_text, ticket_url=ticket_url
         )
@@ -358,7 +358,7 @@ async def generate_ticket_title(text: str):
                 {
                     "role": "system",
                     "content": (
-                        "You are a helpful assistant that helps organise tickets for Hack Club's support team. You're going to take in a message and give it a title. "
+                        "You are a helpful assistant that helps organise tickets for Hackatime's support team. You're going to take in a message and give it a title. "
                         "You will return no other content. Do *NOT* use title case. Avoid quote marks. Even if it's silly please summarise it. Use no more than 7 words, but as few as possible."
                     ),
                 },
